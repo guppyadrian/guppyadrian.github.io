@@ -14,6 +14,13 @@ function DrawFrame() {
   //entitites
   draw(playerImg, {x: 50 + xOffsetOld / 2, y: 375});
 
+  
+  
+  
+  ctx.fillStyle = "white";
+  ctx.font = "45px Arial";
+  ctx.fillText("Playing a card takes " + (3 + 2 * CardsUsedThisTurn) + " Sleep", 250, 50);
+  
   ctx.fillStyle = "darkBlue";
   ctx.fillRect(175 + xOffsetOld / 2, 565, 100, 15);
   ctx.font = "25px Arial";

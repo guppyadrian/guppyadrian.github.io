@@ -133,7 +133,12 @@ function DrawCards() {
   }
 }
 
-DrawCards();
+for (let i = 0; i < 2; i++) {
+    Hand.push(new Card("strike", {x: i * 200, y: 0}));
+}
+for (let i = 2; i < 4; i++) {
+    Hand.push(new Card("defend", {x: i * 200, y: 0}));
+}
 
 var Turn = 0;
 var slimeXPos = 825;
