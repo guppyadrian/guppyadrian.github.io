@@ -14,13 +14,21 @@ function DrawFrame() {
   //entitites
   draw(playerImg, {x: 50 + xOffsetOld / 2, y: 375});
 
-  ctx.fillStyle = "blue";
+  ctx.fillStyle = "darkBlue";
   ctx.fillRect(175 + xOffsetOld / 2, 565, 100, 15);
   ctx.font = "25px Arial";
-  ctx.fillText(GamePlayer.hp + " Sleep", 285 + xOffsetOld / 2, 580);
+  
+  if (GamePlayer.shield > 0)
+    ctx.fillText(GamePlayer.hp + " + " + GamePlayer.shield + " Sleep", 285 + xOffsetOld / 2, 580);
+  else
+    ctx.fillText(GamePlayer.hp + " Sleep", 285 + xOffsetOld / 2, 580);
+  
   ctx.fillStyle = "dodgerBlue";
   ctx.fillRect(175 + xOffsetOld / 2, 565, GamePlayer.hp * 2, 15);
-  
+  if (GamePlayer.shield > 0) {
+    ctx.fillStyle = "Chartreuse";
+    ctx.fillRect(175 + xOffsetOld / 2 + GamePlayer.hp * 2, 565, GamePlayer.shield * 2, 15);
+  }
   draw(Lib.add("slime"), {x: slimeXDraw + xOffsetOld / 2, y: 275});
   
   ctx.fillStyle = "red";

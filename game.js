@@ -64,6 +64,7 @@ class Card {
     this.pos = {x: pos.x, y: 600};
     this.draw = {x: pos.x, y: 0};
     this.dmg = 5;
+    this.shield = 0;
     this.used = false;
     this.rot = 0;
     this.startRot = false;
@@ -73,6 +74,11 @@ class Card {
       case "strike":
         this.img = Lib.add("strike");
         this.dmg = 6;
+        break;
+      case "defend":
+        this.img = Lib.add("defend");
+        this.dmg = 0;
+        this.shield = 5;
         break;
     }
   }
@@ -123,7 +129,7 @@ var transitioning = false;
 function DrawCards() {
   Hand = [];
   for (let i = 0; i < 4; i++) {
-    Hand.push(new Card("strike", {x: i * 200, y: 0}));
+    Hand.push(new Card(["strike","defend"][Math.round(Math.random())], {x: i * 200, y: 0}));
   }
 }
 

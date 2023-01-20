@@ -39,7 +39,12 @@ canvas.addEventListener("mousedown", Event => {
       card.used = true;
       
       setTimeout(() => {
-        Damage(card.dmg, 1);
+        if (card.dmg > 0)
+          Damage(card.dmg, 1);
+        if (card.shield > 0) {
+          GamePlayer.recoverShield(card.shield);
+          CardsUsedThisTurn--;
+        }
         card.startRot = true;
         card.ticker += 1;
       }, 500);

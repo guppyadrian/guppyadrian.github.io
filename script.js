@@ -52,7 +52,7 @@ function endTurn() {
   slimeXPos = 725;
   setTimeout(() => {
     slimeXPos = 825;
-    Damage(11 + Turn++, 0);
+    Damage(8 + Turn++, 0);
     if (GamePlayer.hp <= 0) {
       ctx.fillStyle = "red";
       ctx.font = "60px Arial";
