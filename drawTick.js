@@ -45,7 +45,7 @@ function DrawFrame() {
   ctx.fillRect(952 + xOffsetOld / 2, 565, GameEnemy.hp * 2, 15);
 
   for (const card in Hand) {
-    draw(Hand[card].img, Hand[card].draw, {w: 169, h: 218}, Hand[card].rot);
+    draw(Hand[card].img, Hand[card].draw, {w: 185, h: 238}, Hand[card].rot);
   }
 
   for (const ticPos in lifespanArray) {
