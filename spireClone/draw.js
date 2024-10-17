@@ -3,7 +3,7 @@ var Lib = {
   add: function(name) {
     if (!(name in this.imgLib)) {
       this.imgLib[name] = new Image();
-      this.imgLib[name].src = "spireClone/textures/" + name + ".webp";
+      this.imgLib[name].src = "./textures/" + name + ".webp";
     }
     return this.imgLib[name];
   },
