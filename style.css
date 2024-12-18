@@ -11,7 +11,7 @@ h {
   float: left;
   font-size: 35px;
   color: #ccdddd;
-  transition: 0.5s cubic-bezier(.71,1.72,.22,.79);
+  transition: font-size 0.5s cubic-bezier(.21,2.57,.2,.39), color 0.2s;
   text-decoration: none;
   text-align: center;
   position: absolute;

@@ -328,7 +328,7 @@ TICK = function() {
 /*
 you stupid*/
 
-if (navigator.userAgentData.mobile || true) {
+if (!(navigator.userAgentData) || navigator.userAgentData.mobile || true) {
   const ar = ['ArrowLeft','ArrowRight','ArrowDown','ArrowUp','r','e']
   const arp = [[0,20],[80,20],[40,40],[40,0],[0,80],[40,80]];
   for (let i = 0; i < 6; i++) {
