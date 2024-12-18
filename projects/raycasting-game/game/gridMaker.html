@@ -1,0 +1,139 @@
+<head>
+	<title>Raycast Creator</title>
+  <style>
+    .wrap{display:flex; height:100%; width:100%; justify-content:flex-start; flex-direction:row; background:#aaa;}
+    .l{width:30%; background:#ccc; padding:15px;}
+    .rightbox{width:70%; padding:15px;}
+    .rightbox .jimbo{display:flex; flex-wrap:wrap; flex-direction:row;}
+    input[type="number"]{width:60px;}
+    .t{width:20px; height:20px; border:1px solid purple;}
+    .tile{width:30px; height:30px; border:1px solid #aaa; display:inline-block; margin:2px; vertical-align:top; cursor:pointer;}
+    .tile.on{border:2px solid #000;}
+  </style>
+</head>
+<div class="wrap">
+<div class="l">
+	Tile:
+		<div class="tile" style="background:#f00" data-val="1"></div>
+		<div class="tile" style="background:#00f" data-val="2"></div>
+		<div class="tile" style="background:none" data-val="0"></div>
+	<br ><br >
+	Grid size:
+	<input id="sizex" type="number" value="20"/> X <input id="sizey" type="number" value="20"/><br /><br />
+	<button onclick="generate_tiles();">Generate</button>
+	<div id="bob"></div>
+	<br><br><button onclick="download_file()">Download Map</button>
+  <br><button onclick="upload_file()">Upload Map</button>
+	</div>
+<div class="rightbox"></div>
+</div>
+
+
+<script>
+  var activetile='';
+  var tilesize=20;
+  var bob = document.getElementById("bob");
+  var gridx = 20;
+  var gridy = 20;
+  
+  function generate_tiles(){
+  	var gridx = parseInt(document.getElementById('sizex').value);
+  	var gridy = parseInt(document.getElementById('sizey').value);
+  	if(gridx<1 ||gridy<1){
+  		alert("Don't be a jerk"); return false;
+  	}
+  	
+  	var r = document.querySelector(".rightbox");
+  	var thegrid = document.createElement('div');
+  	thegrid.classList.add("jimbo");
+  	thegrid.style.width= (gridx*22)+'px';
+  	var thestring ='';
+  	for(var i=0; i<gridx; i++){
+  		
+  		for(var j=0; j<gridy; j++){
+  			thestring = thestring +'<div class="t"></div>';
+  		}
+  	}
+  	thegrid.innerHTML=thestring;
+  	r.innerHTML='';
+  	r.append(thegrid);
+  
+  	var jimbo = document.querySelector(".jimbo");
+  	var listening = false;
+  	jimbo.addEventListener("mousedown",function(e){
+  		listening = true;
+  	});
+  	jimbo.addEventListener("mouseup",function(e){
+  		listening = false;
+  	});	
+  	jimbo.addEventListener("mouseleave",function(e){
+  		listening = false;
+  	});
+  	jimbo.addEventListener("mousemove",function(e){
+  		if(listening===true){
+  			if(activetile==''){
+  					alert("No Active tile!"); return false;
+  			}else{
+  			
+  				var offset = this.getBoundingClientRect();
+  				var relativeX = Math.floor(e.pageX - offset.left);
+  				var relativeY = Math.floor(e.pageY - offset.top);				
+  				var rows = Math.floor(relativeY/(tilesize+2));
+  				var cols = Math.floor(relativeX/(tilesize+2));
+  				var pos = Math.floor((rows)*gridx + cols);
+  				//bob.innerHTML=relativeX+'--'+relativeY+'<br>'
+  				//	+rows+'--'+cols+'--'+pos;
+  				//console.log(pos);
+  				document.querySelectorAll(".jimbo .t")[pos].style.background=activetile;
+  			}
+  		}
+  	});
+  	
+  	
+  }
+  window.onload = generate_tiles();
+  
+  
+  var tiles = document.querySelectorAll(".tile");
+  for(var i=0; i<tiles.length; i++){
+  	tiles[i].addEventListener("click",function(){
+  		var tilesagain = document.querySelectorAll(".tile");
+  		for(var j=0; j<tilesagain.length; j++){
+  			//console.log(tilesagain[j]);
+  			if(this.style.background != tilesagain[j].style.background){
+  				tilesagain[j].classList.remove("on");
+  			}
+  		}		
+  		this.classList.add("on");
+  		activetile = this.style.background;		
+  	});
+  	
+  }
+  
+  function download_file(){
+    
+  	var maptiles = document.querySelectorAll(".jimbo .t");
+  	var tiles = document.querySelectorAll(".tile");
+  	var filestring='';
+  	for(var i=0; i<maptiles.length;i++){
+  		curtileval=0;
+  		for(var j=0; j<tiles.length; j++){
+  			if(maptiles[i].style.background == tiles[j].style.background){
+  				curtileval = tiles[j].getAttribute('data-val')
+  			}
+  		}
+  		filestring = filestring + ','+curtileval;
+  		if((i+1)%gridx==0 && i>0){
+  			filestring = filestring +"<br>";
+  		}
+  	}
+  	
+  	
+    var tab = window.open('about:blank', '_blank');
+    tab.document.write(filestring.substring(1)); // where 'html' is a variable containing your HTML
+    tab.document.close(); // to finish loading the page
+  }
+
+  function upload_file() {
+  }
+</script>
