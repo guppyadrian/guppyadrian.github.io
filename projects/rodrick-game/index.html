@@ -14,7 +14,11 @@
 <br>
 
 <body>
-  <script src="/loadMainSite.js"></script>
+  <script>
+    $(function(){
+      $(".topnav").load("/navbar.html");
+    });
+  </script>
   <h>
     Rodrick Tries His Best
   </h>

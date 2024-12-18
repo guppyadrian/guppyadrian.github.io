@@ -1,4 +1,4 @@
 $(function(){
+    console.log(window.location.pathname)
     $(".topnav").load("/navbar.html");
-    console.log(window.location.pathname);
   });
