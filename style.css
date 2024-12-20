@@ -19,12 +19,12 @@ h {
   bottom: 0px;
 }
 
-.topnav div:hover > a {
+.topnav .navdiv:hover > a {
   color: #334455;
   font-size: 40px;
 }
 
-.topnav div {
+.topnav .navdiv {
   background-color: #334455;
   float: left;
   height: 50px;
@@ -33,6 +33,6 @@ h {
   position: relative;
 }
 
-.topnav div:hover {
+.topnav .navdiv:hover {
   background-color: #ccdddd;
 }
