@@ -21,6 +21,7 @@ var Lib = {
 
 const Keys = {};
 
+
 const Cam = {x: 0, y: 0, z: 1};
 const camXCenter = (canvas.width - canvas.height) / 2;
 const ctx = canvas.getContext('2d');
